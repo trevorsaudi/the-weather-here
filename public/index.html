@@ -1,53 +1,28 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title></title>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-</head>
-<body>
-
-	<script>
-
-		if ('geolocation' in navigator){
-			console.log('geolocation available');
-			navigator.geolocation.getCurrentPosition(async position => {
-				const lat = position.coords.latitude;
-				const lon = position.coords.longitude;
-				document.getElementById('latitude').textContent = lat;
-				document.getElementById('longitude').textContent = lon;
-
-				const data = {lat, lon};
-				const options = {
-					method: 'POST',
-					body: JSON.stringify(data),
-					headers: {
-				      'Content-Type': 'application/json'
-				    }
-				};
-
-				const response = await fetch('/api' , options);
-				const json = await response.json();
-				console.log(json);
-
-
-
-
-				});
-		} else {
-			console.log('geolocation not available')
-		}
-
-	</script>
-
-	<h1>Data Selfie App</h1>
-	<p>
-		latitude : <span id="latitude"></span> &deg<br />
-		longitude : <span id="longitude"></span>&deg
-		
-	
-
-	</p>
-</body>
+    <title>The Weather Here</title>
+  </head>
+  <body>
+    <h1>The Weather is Here</h1>
+    <div>
+      <a href="/">check in</a> | <a href="/checkins">view checkins</a>
+    </div>
+    <p>
+      The weather here at <span id="latitude"></span>&deg;,
+      <span id="longitude"></span>&deg; is <span id="summary"></span> with
+      a temperature of <span id="temp"></span>&deg; C. The concentration of
+      particulate matter (<span id="aq_parameter"></span>) is
+      <span id="aq_value"></span> <span id="aq_units"></span> last read on
+      <span id="aq_date"></span>.
+    </p>
+    <script src="sketch.js"></script>
+  </body>
 </html>
-
-<!-- to do, add leaflet.js to show us where we are exactly on the map -->
